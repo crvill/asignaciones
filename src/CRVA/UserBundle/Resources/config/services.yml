@@ -1,0 +1,4 @@
+services:
+#    crva_user.example:
+#        class: CRVA\UserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
