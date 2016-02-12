@@ -6,8 +6,19 @@ crva_user_index:
     path:     /user/index
     defaults: { _controller: CRVAUserBundle:User:index }
 
-crva_user_articles:
-    path:     /user/articles/{page}
-    defaults: { _controller: CRVAUserBundle:User:articles, page: 1 }
-    requirements:
-        page: \d+
+crva_user_add:
+    path:     /user/add
+    defaults: { _controller: CRVAUserBundle:User:add }
+
+crva_user_edit:
+    path:     /user/edit/{id}
+    defaults: { _controller: CRVAUserBundle:User:edit}
+
+crva_user_view:
+    path:     /user/view/{id}
+    defaults: { _controller: CRVAUserBundle:User:view}
+
+crva_user_delete:
+    path:     /user/delete/{id}
+    defaults: { _controller: CRVAUserBundle:User:delete}
+

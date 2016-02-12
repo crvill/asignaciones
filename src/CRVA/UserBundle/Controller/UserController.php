@@ -12,8 +12,23 @@ class UserController extends Controller
         return new Response("Bienvenidos a mi modulo de usuarios");
     }
 
-    public function articlesAction($page)
+    public function addAction()
     {
-        return new Response("Este es mi articulo" . $page);
+        
+    }
+
+    public function editAction()
+    {
+        
+    }
+
+    public function viewAction()
+    {
+        
+    }
+
+    public function deleteAction()
+    {
+        
     }
 }
