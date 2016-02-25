@@ -35,7 +35,7 @@ class UserController extends Controller
         return $this->render('CRVAUserBundle:User:add.html.twig', array('form' => $form->createView()));
     }
 
-    private createCreateForm(User $entity)
+    private function createCreateForm(User $entity)
     {
         $form = $this->createForm(new UserType(), $entity, array(
             'action' => $this->generateUrl('crva_user_create'),
@@ -46,7 +46,30 @@ class UserController extends Controller
 
     public function createAction(Request $request)
     {
-        # code...
+        $user = new User();
+        $form = $this->createCreateForm($user);
+        $form->handleRequest($request);
+
+        if($form->isValid()){
+
+            $password = $form->get('password')->getData();
+
+            $encoder = $this->container->get('security.password_encoder');
+            $encoder = $encoder->encodePassword($user,$password);
+            
+            $user->setPassword($encoder);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            $successMessage = $this->get('translator')->trans('The user has been created.');
+            $this->addFlash('mensaje', $successMessage);
+
+            return $this->redirectToRoute("crva_user_index"); 
+        }
+
+        return $this->render('CRVAUserBundle:User:add.html.twig', array('form' => $form->createView()));
     }
 
     public function editAction()
