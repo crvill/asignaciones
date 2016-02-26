@@ -10,11 +10,12 @@ use CRVA\UserBundle\Form\UserType;
 
 class UserController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $users = $em->getRepository('CRVAUserBundle:User')->findAll();
+        //$users = $em->getRepository('CRVAUserBundle:User')->findAll();
+        
 
         /**$res = 'Lista de usuarios: <br/>';
 
@@ -24,7 +25,16 @@ class UserController extends Controller
 
         return new Response($res);**/
 
-        return $this->render('CRVAUserBundle:User:index.html.twig', array('users' => $users));
+        $dql = "SELECT u FROM CRVAUserBundle:User u";
+        $users = $em->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $users,$request->query->getInt('page',1),
+            6
+        );
+
+        return $this->render('CRVAUserBundle:User:index.html.twig', array('pagination' => $pagination));
     }
 
     public function addAction()
