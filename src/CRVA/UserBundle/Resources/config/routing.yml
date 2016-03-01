@@ -19,6 +19,11 @@ crva_user_edit:
     path:     /user/edit/{id}
     defaults: { _controller: CRVAUserBundle:User:edit}
 
+crva_user_update:
+    path:     /user/update/{id}
+    defaults: { _controller: CRVAUserBundle:User:update}
+    methods: [POST, PUT]
+
 crva_user_view:
     path:     /user/view/{id}
     defaults: { _controller: CRVAUserBundle:User:view}
@@ -26,10 +31,18 @@ crva_user_view:
 crva_user_delete:
     path:     /user/delete/{id}
     defaults: { _controller: CRVAUserBundle:User:delete}
+    methods: [POST, DELETE]
 
 crva_user_redirect_add:
     path:     /user/create
     defaults:
         _controller: CRVAUserBundle:User:add
         path: /user/add
+        permanent: true
+
+crva_user_redirect_edit:
+    path:     /user/update/{id}
+    defaults:
+        _controller: CRVAUserBundle:User:edit
+        path: /user/edit/{id}
         permanent: true
