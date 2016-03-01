@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormError;
 use CRVA\UserBundle\Entity\User;
 use CRVA\UserBundle\Form\UserType;
 
+
 class UserController extends Controller
 {
     public function indexAction(Request $request)
@@ -213,7 +214,7 @@ class UserController extends Controller
             throw $this->createNotFoundException($messageException);
         } 
 
-        //$form = $this->createDeleteFOrm($user);
+        //$form = $this->createDeleteForm($user);
         $allUsers = $em->getRepository('CRVAUserBundle:User')->findAll();
         $countUsers = count($allUsers);
 
@@ -226,9 +227,9 @@ class UserController extends Controller
                 $res = $this->deleteUser($user->getRole(), $em, $user);
 
                 return new Response(
-                    json_encode(array('removed'=>$res['removed'], 'message' => $res['message'], 'countUsers' => $countUsers)), 
-                    200, 
-                    array('Content-Type' => 'application')
+                    json_encode(array('removed' => $res['removed'], 'message' => $res['message'], 'countUsers' => $countUsers)),
+                    200,
+                    array  ('Content-Type' => 'application/json')
                 );
             }
 
